@@ -4,7 +4,8 @@ var btnElement = document.querySelector('#app button')
 
 
 //LISTA DEFAULT DE TODOS
-var todos = ['Estudar JavaScript', 'Pagar contas', 'Estudar para prova'];
+var todos = JSON.parse(localStorage.getItem('list_todos')) || []; /* Transforma o JSON de volta em array
+e caso não haja nada no localStorage, retorna um array vazio. */
 
 // CRIA E RENDERIZA A LISTA DE TODOS
 function renderTodos() {
@@ -39,6 +40,7 @@ function addTodo() {
     todos.push(todoText); // novo item no fim da array todos
     inputElement.value = '';
     renderTodos();
+    saveToStorage();
 }
 
 btnElement.onclick = addTodo;
@@ -47,4 +49,13 @@ btnElement.onclick = addTodo;
 function deleteTodo(pos) {
     todos.splice(pos, 1); //remove exatamente esse item da posição pos
     renderTodos();
+    saveToStorage();
+}
+
+//STORAGE - To-Dos estarão salvos mesmo renderizarando a página do navegador
+//Devido sua simplicidade e não poder gravar arrays, por exemplo, convertemos todos em JSON (Objeto de JS em string)
+
+function saveToStorage() {
+    localStorage.setItem('list_todos', JSON.stringify(todos)); 
+
 }
