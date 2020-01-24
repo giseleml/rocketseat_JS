@@ -47,3 +47,11 @@ demais itens anteriores. Além disso, o conteúdo do input deve ser apagado apó
         </script>
     </body>
 </html>
+
+// Outra possível solução para o Exercício 3 usando forEach
+
+nomes.forEach(nome => {
+    let li = document.createElement('li')
+    lista.appendChild(li)
+    li.innerHTML = li.innerHTML + nome 
+})
